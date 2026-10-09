@@ -28,7 +28,7 @@ Required columns: `Tkr`, `%Allocation`, `%Gain`, `LT/ST`, `Expected_Hold_Return`
 
 ```bash
 pip install -r requirements.txt
-streamlit run cb_tax_engine/app.py
+streamlit run streamlit_app.py
 ```
 
 Enter the total portfolio value, then load sample data, upload/paste a CSV (with the required columns as header), or edit rows in the table. Click **Run analysis** to see the output of `process_tax_drag`.
