@@ -8,6 +8,14 @@ Calculates the upfront tax drag of selling a position and compares holding vs. r
 pip install -r requirements.txt
 ```
 
+## Run the Streamlit app
+
+```bash
+streamlit run streamlit_app.py
+```
+
+On Streamlit Community Cloud, set the main file path to `streamlit_app.py` (not `cb_tax_engine/engine.py`).
+
 ## Usage
 
 ```python
