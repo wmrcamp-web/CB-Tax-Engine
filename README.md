@@ -23,3 +23,12 @@ print(process_tax_drag(df, total_portfolio_value=1_000_000))
 ```
 
 Required columns: `Tkr`, `%Allocation`, `%Gain`, `LT/ST`, `Expected_Hold_Return`, `Expected_New_Return`, `Forward_Horizon_Years`.
+
+## Streamlit app
+
+```bash
+pip install -r requirements.txt
+streamlit run cb_tax_engine/app.py
+```
+
+Enter the total portfolio value, then load sample data, upload/paste a CSV (with the required columns as header), or edit rows in the table. Click **Run analysis** to see the output of `process_tax_drag`.
