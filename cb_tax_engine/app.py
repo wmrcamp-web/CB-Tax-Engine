@@ -35,7 +35,7 @@ def parse_pasted(text: str, defaults=None) -> pd.DataFrame:
     if missing:
         raise ValueError(f"Missing columns: {', '.join(missing)}")
     for c in COLUMNS[4:]:
-        vals = out[c].map(clean_numeric_string) if out[c].dtype == object else out[c]
+        vals = out[c].map(clean_numeric_string).astype(float)
         if c != "Forward_Horizon_Years":
             vals = vals.where(vals.abs() <= 1, vals / 100)
         out[c] = vals
