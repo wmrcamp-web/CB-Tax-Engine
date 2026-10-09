@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cb-tax-engine"
+version = "0.1.0"
+description = "Tax drag and redeploy-vs-hold analysis engine"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["pandas", "numpy"]
+
+[tool.setuptools]
+packages = ["cb_tax_engine"]
