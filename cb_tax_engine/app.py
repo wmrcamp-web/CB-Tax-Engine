@@ -119,6 +119,19 @@ def main():
     if "data" not in st.session_state:
         st.session_state.data = SAMPLE.copy()
 
+    st.markdown(
+        """
+        <style>
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] [data-testid="stPageLink"] p {
+            font-size: 1.75rem !important;
+            font-weight: 700 !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     with st.sidebar:
         st.page_link(st.session_state["about_page"], label="What it does",
                      icon=":material/info:")
