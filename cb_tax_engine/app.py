@@ -64,8 +64,53 @@ DISCLAIMER = """
 """
 
 
-def main():
+ABOUT = """
+You own a stock that has doubled in value. You're thinking about selling it to
+buy something you expect to grow faster. There's a catch: when you sell for a
+profit, the government takes a cut called a capital gains tax. That tax shrinks
+the money you'd have left to reinvest, so the new investment has to make up
+that lost ground. This program works out whether the switch is worth it.
+
+### How it works
+
+1. **You enter your data.** You give it a list of investments, each with its
+   ticker symbol, share of your portfolio, how much it has gained, and whether
+   you held it long-term (LT) or short-term (ST). You also set your total
+   portfolio value, how much you expect to earn by keeping it, how much you'd
+   earn by switching, and how many years you'd wait. You can type rows in,
+   upload a spreadsheet file, or paste data.
+2. **It figures out the tax.** Short-term gains are taxed at a higher rate
+   (40.8%) than long-term gains (23.9%). The program applies the right rate to
+   the profit portion of each investment.
+3. **It compares two futures.** It calculates what the investment would be
+   worth if you hold it, and what it would be worth if you pay the tax and
+   redeploy the rest.
+4. **It makes a call.** If redeploying wins, it says REDEPLOY. If not, it says
+   HOLD. It also shows how many years it would take to earn back the tax.
+
+The results appear in a table with totals for each group.
+"""
+
+
+def about_page():
+    st.title("CB Tax Engine: What It Does")
+    st.page_link(st.session_state["home_page"], label="Back to the analysis",
+                 icon=":material/arrow_back:")
+    st.markdown(ABOUT)
+    st.divider()
+    st.caption(DISCLAIMER)
+
+
+def run():
     st.set_page_config(page_title="CB Tax Engine", layout="wide")
+    home = st.Page(main, title="Analysis", url_path="analysis", default=True)
+    about = st.Page(about_page, title="What it does", url_path="about")
+    st.session_state["home_page"] = home
+    st.session_state["about_page"] = about
+    st.navigation([home, about], position="hidden").run()
+
+
+def main():
     st.title("CB Tax Engine")
     st.warning("Research only. Not tax or investment advice. AI-generated code "
                "that may contain errors. Consult a tax professional and an "
@@ -75,6 +120,8 @@ def main():
         st.session_state.data = SAMPLE.copy()
 
     with st.sidebar:
+        st.page_link(st.session_state["about_page"], label="What it does",
+                     icon=":material/info:")
         st.header("Controls")
         total = st.slider("Portfolio value ($)", 1_000_000, 100_000_000,
                           1_000_000, step=500_000, format="$%d")
@@ -129,4 +176,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run()

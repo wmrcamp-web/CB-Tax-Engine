@@ -1,3 +1,3 @@
-from cb_tax_engine.app import main
+from cb_tax_engine.app import run
 
-main()
+run()
