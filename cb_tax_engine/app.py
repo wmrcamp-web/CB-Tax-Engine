@@ -42,9 +42,34 @@ def parse_pasted(text: str, defaults=None) -> pd.DataFrame:
     return out[COLUMNS]
 
 
+DISCLAIMER = """
+**Important disclaimers**
+
+- **Research and education only.** This tool is not tax, legal, accounting or
+  investment advice, and nothing here is an offer or recommendation to buy,
+  sell or hold any security. Consult a qualified tax professional and a
+  licensed investment advisor before making any decision.
+- **AI-generated code.** This software was written with the help of artificial
+  intelligence. Although believed to be accurate, it may contain errors,
+  "hallucinations", incorrect assumptions or bugs. Verify all results
+  independently.
+- **Simplified model.** Results rely on your inputs and on simplifying
+  assumptions (flat 23.9% long-term and 40.8% short-term tax rates, constant
+  returns, no state-specific rules, fees, wash-sale rules, loss
+  harvesting or other individual circumstances). Projections are hypothetical;
+  actual returns will vary and past performance does not guarantee future
+  results.
+- **No warranty or liability.** Provided "as is" without warranty of any kind.
+  The authors accept no liability for any loss or damage arising from its use.
+"""
+
+
 def main():
     st.set_page_config(page_title="CB Tax Engine", layout="wide")
     st.title("CB Tax Engine")
+    st.warning("Research only. Not tax or investment advice. AI-generated code "
+               "that may contain errors. Consult a tax professional and an "
+               "investment advisor. See full disclaimers below.")
 
     if "data" not in st.session_state:
         st.session_state.data = SAMPLE.copy()
@@ -98,6 +123,9 @@ def main():
             st.error(f"Analysis failed: {exc}")
             return
         st.dataframe(result, width="stretch", hide_index=True)
+
+    st.divider()
+    st.caption(DISCLAIMER)
 
 
 if __name__ == "__main__":
