@@ -49,19 +49,19 @@ def main():
     if "data" not in st.session_state:
         st.session_state.data = SAMPLE.copy()
 
-    total = st.number_input("Total portfolio value ($)", min_value=0.0,
-                            value=1_000_000.0, step=10_000.0)
-
-    st.caption("Defaults used when an uploaded/pasted file lacks these columns "
-               "(returns as %, e.g. 6 = 6%).")
-    d1, d2, d3 = st.columns(3)
-    hold = d1.number_input("Expected hold return (%)", value=6.0, step=0.5)
-    new = d2.number_input("Expected redeployment return (%)", value=10.0, step=0.5)
-    years = d3.number_input("Forward holding period (years)", value=10.0, min_value=0.0, step=1.0)
+    with st.sidebar:
+        st.header("Controls")
+        total = st.slider("Portfolio value ($)", 1_000_000, 100_000_000,
+                          1_000_000, step=500_000, format="$%d")
+        hold = st.slider("Expected hold return (%)", 0, 50, 10)
+        new = st.slider("Expected redeployment return (%)", 0, 50, 15)
+        years = st.slider("Forward holding period (years)", 1, 30, 5)
+        st.caption("Return and period values are used when an uploaded/pasted "
+                   "file lacks those columns.")
     defaults = {
         "Expected_Hold_Return": hold / 100,
         "Expected_New_Return": new / 100,
-        "Forward_Horizon_Years": years,
+        "Forward_Horizon_Years": float(years),
     }
 
     col1, col2 = st.columns(2)
