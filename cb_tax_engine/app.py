@@ -56,8 +56,8 @@ def main():
                "(returns as %, e.g. 6 = 6%).")
     d1, d2, d3 = st.columns(3)
     hold = d1.number_input("Expected hold return (%)", value=6.0, step=0.5)
-    new = d2.number_input("Expected new return (%)", value=10.0, step=0.5)
-    years = d3.number_input("Forward horizon (years)", value=10.0, min_value=0.0, step=1.0)
+    new = d2.number_input("Expected redeployment return (%)", value=10.0, step=0.5)
+    years = d3.number_input("Forward holding period (years)", value=10.0, min_value=0.0, step=1.0)
     defaults = {
         "Expected_Hold_Return": hold / 100,
         "Expected_New_Return": new / 100,
@@ -79,7 +79,13 @@ def main():
         st.error(f"Could not read data: {exc}")
 
     edited = st.data_editor(st.session_state.data, num_rows="dynamic",
-                            width="stretch", key="editor")
+                            width="stretch", key="editor",
+                            column_config={
+                                "Expected_New_Return": st.column_config.NumberColumn(
+                                    "Expected Redeployment Return"),
+                                "Forward_Horizon_Years": st.column_config.NumberColumn(
+                                    "Forward Holding Period (years)"),
+                            })
 
     if st.button("Run analysis", type="primary"):
         rows = edited.dropna(how="all")
