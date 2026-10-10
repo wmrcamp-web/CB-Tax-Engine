@@ -75,10 +75,11 @@ that lost ground. This program works out whether the switch is worth it.
 
 1. **You enter your data.** You give it a list of investments, each with its
    ticker symbol, share of your portfolio, how much it has gained, and whether
-   you held it long-term (LT) or short-term (ST). You also set your total
-   portfolio value, how much you expect to earn by keeping it, how much you'd
-   earn by switching, and how many years you'd wait. You can type rows in,
-   upload a spreadsheet file, or paste data.
+   you held it long-term (LT) or short-term (ST). This process can be done in
+   a separate spreadsheet, which can be uploaded in comma separated values
+   (csv) format. You also set your total portfolio value, how much you expect
+   to earn by keeping it, how much you'd earn by switching, and how many years
+   you'd wait. You can type rows in, upload a spreadsheet file, or paste data.
 2. **It figures out the tax.** Short-term gains are taxed at a higher rate
    (40.8%) than long-term gains (23.9%). The program applies the right rate to
    the profit portion of each investment.
